@@ -46,27 +46,25 @@
   section.notice b { color:var(--ink); }
 
   .grid {
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:14px; margin-top:26px;
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(118px, 1fr)); gap:10px; margin-top:26px;
   }
   .game {
-    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px;
-    display:flex; flex-direction:column; gap:10px; position:relative; overflow:hidden; transition:border-color .15s, transform .15s;
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 8px 10px;
+    display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center;
+    position:relative; overflow:hidden; transition:border-color .15s, transform .15s; min-height:104px;
   }
   .game:hover { border-color:var(--accent); transform:translateY(-2px); }
-  .game .emoji { font-size:1.8rem; line-height:1; }
-  .game h3 { margin:0; font-size:1.05rem; font-weight:700; }
-  .game p.tag { margin:0; color:var(--muted); font-size:0.84rem; line-height:1.45; flex:1; }
+  .game .emoji { font-size:1.6rem; line-height:1; }
+  .game h3 { margin:0; font-size:0.78rem; font-weight:700; line-height:1.25; }
   .game .play {
-    display:inline-flex; align-items:center; justify-content:center; gap:6px;
-    padding:10px 14px; border-radius:10px; border:1px solid var(--accent);
-    background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:0.88rem;
-    text-decoration:none; cursor:pointer;
+    position:absolute; inset:0; z-index:1; border-radius:inherit; text-decoration:none;
   }
-  .game .play:hover { filter:brightness(1.08); }
-  .game .direct {
-    text-align:center; font-size:0.72rem; color:var(--muted); text-decoration:none; opacity:0.75;
+  .game .short {
+    position:absolute; top:6px; right:6px; z-index:2; width:22px; height:22px; border-radius:999px;
+    display:flex; align-items:center; justify-content:center; background:var(--field); border:1px solid var(--line);
+    color:var(--muted); font-size:0.7rem; text-decoration:none; line-height:1;
   }
-  .game .direct:hover { opacity:1; text-decoration:underline; }
+  .game .short:hover { color:var(--accent); border-color:var(--accent); }
 
   .support {
     margin-top:46px; padding-top:28px; border-top:1px solid var(--line);
@@ -109,9 +107,8 @@
 
 <div class="wrap">
   <section class="notice">
-    <b>About the Play links:</b> they route through a quick one-tap human-check page — no ads, no popups — which
-    helps fund this project a little, then drops you straight into the game. Prefer to skip it? Every card has a
-    small direct link too.
+    Tap a tile to play a game directly. Each tile also has a small <b>🎟️</b> in the corner — that's an optional
+    short link that routes through a quick human-check page (no ads) and helps fund this project a little, if you don't mind it.
   </section>
 
   <div class="grid" id="grid"></div>
@@ -178,12 +175,12 @@
   GAMES.forEach(function (g) {
     const card = document.createElement("div");
     card.className = "game";
+    card.title = g.tag;
     card.innerHTML =
       '<div class="emoji">' + g.emoji + '</div>' +
       '<h3>' + g.name + '</h3>' +
-      '<p class="tag">' + g.tag + '</p>' +
-      '<a class="play" href="' + g.short + '" target="_blank" rel="noopener">Play</a>' +
-      '<a class="direct" href="' + g.direct + '" target="_blank" rel="noopener">skip the short link →</a>';
+      '<a class="play" href="' + g.direct + '" target="_blank" rel="noopener" aria-label="Play ' + g.name + '"></a>' +
+      '<a class="short" href="' + g.short + '" target="_blank" rel="noopener" title="Open via short link (supports this project)" aria-label="Open ' + g.name + ' via short link">🎟️</a>';
     grid.appendChild(card);
   });
   document.getElementById("gamecount").textContent = GAMES.length;
