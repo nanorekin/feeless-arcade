@@ -4,10 +4,10 @@ A single-file hub page linking out to the whole collection of free, Nano (XNO) t
 
 ## How it works
 
-- The games are shown as a dense grid of tiles (like an app launcher) so all 14 fit on one screen with minimal scrolling. Hover (or long-press on mobile) a tile to see its one-line description as a tooltip.
-- Tapping a tile goes straight to that game's GitHub Pages URL — the direct link is the primary, whole-tile click target, so there's no captcha in the way of actually playing.
-- Each tile also has a small 🎟️ icon in the corner, a secondary link to that game's `xno.click` short link (a one-tap human-check page, not an ad) for anyone happy to go the extra step and help fund the project a little.
-- The full game list — name, tagline, emoji, direct URL, short URL — lives in the `GAMES` array near the top of the `<script>` block in `index.html`. To add, remove, re-order or re-link a game, edit that array; nothing else needs to change.
+- The games are shown as a dense grid of tiles (like an app launcher) so all of them fit on one screen with minimal scrolling. Hover (or long-press on mobile) a tile to see its one-line description as a tooltip.
+- Tapping a tile goes straight to that game's GitHub Pages URL in a new tab — one tap, no detours.
+- The full game list — name, tagline, emoji, direct URL — lives in the `GAMES` array near the top of the `<script>` block in `index.html`. To add, remove, re-order or re-link a game, edit that array; nothing else needs to change.
+- The notice banner above the grid links out to X (`https://x.com/AngelsWing40753/`) for bug reports and game ideas — edit that `href` in `index.html` to point feedback somewhere else.
 - The **Support this project** section at the bottom shows your XNO address and your BTC address, each with a QR code (built with `nano:`/`bitcoin:` URIs), a copy button and an "Open in wallet" button. There's no payment verification here (unlike the supporter unlock inside each individual game) — it's just a simple, always-visible way to tip either coin.
 
 ## Deploy on GitHub Pages
@@ -21,10 +21,10 @@ Once it's live, you may want to link to it from each individual game (and/or set
 
 ## Updating the game list
 
-To add a 15th game later, add a new entry to the `GAMES` array in `index.html`:
+To add another game later, add a new entry to the `GAMES` array in `index.html`:
 
 ```js
-{ emoji: "🎮", name: "New Game", tag: "A one-line description.", direct: "https://nanorekin.github.io/new-game/", short: "https://xno.click/NewGame" }
+{ emoji: "🎮", name: "New Game", tag: "A one-line description.", direct: "https://nanorekin.github.io/new-game/" }
 ```
 
 Reorder entries in the array to change the order they appear in the grid (currently newest-built first).

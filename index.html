@@ -59,12 +59,6 @@
   .game .play {
     position:absolute; inset:0; z-index:1; border-radius:inherit; text-decoration:none;
   }
-  .game .short {
-    position:absolute; top:6px; right:6px; z-index:2; width:22px; height:22px; border-radius:999px;
-    display:flex; align-items:center; justify-content:center; background:var(--field); border:1px solid var(--line);
-    color:var(--muted); font-size:0.7rem; text-decoration:none; line-height:1;
-  }
-  .game .short:hover { color:var(--accent); border-color:var(--accent); }
 
   .support {
     margin-top:46px; padding-top:28px; border-top:1px solid var(--line);
@@ -107,8 +101,8 @@
 
 <div class="wrap">
   <section class="notice">
-    Tap a tile to play a game directly. Each tile also has a small <b>🎟️</b> in the corner — that's an optional
-    short link that routes through a quick human-check page (no ads) and helps fund this project a little, if you don't mind it.
+    Tap a tile to play a game directly — every game opens in a new tab. Found a bug, or got an idea for a game?
+    <a href="https://x.com/AngelsWing40753/" target="_blank" rel="noopener" style="color:var(--accent);">Let me know on X</a>.
   </section>
 
   <div class="grid" id="grid"></div>
@@ -151,23 +145,26 @@
   const BTC_ADDRESS = "bc1q06lvnx6csg52yf2t29arx6k8xlk3hjnneht5ye";
 
   // ---------- game list ----------
-  // Edit this array to add, remove, or re-link a game. "direct" is the GitHub Pages
-  // URL, "short" is the xno.click monetized short link used as the primary Play button.
+  // Edit this array to add, remove, or re-link a game. "direct" is the game's GitHub Pages URL.
   const GAMES = [
-    { emoji: "🚀", name: "To the moon", tag: "Blast asteroids before they reach your rocket — collect XNO, BTC, ETH and SOL power-ups along the way.", direct: "https://nanorekin.github.io/ToTheMoon/", short: "https://xno.click/ToTheMoon" },
-    { emoji: "🏎️", name: "Block Racer", tag: "A 3-lane dodging racer through rival-chain traffic, with an XNO nitro power-up.", direct: "https://nanorekin.github.io/block-racer/", short: "https://xno.click/BlockRacer" },
-    { emoji: "🧪", name: "CoinFusion", tag: "A 2048-style merging game — combine coins from DOGE all the way up to XNO.", direct: "https://nanorekin.github.io/CoinFusion/", short: "https://xno.click/CoinFusion" },
-    { emoji: "🥊", name: "Crypto Clash: Chain Strike", tag: "A crypto-fighting game — pick your chain and battle it out.", direct: "https://nanorekin.github.io/crypto-clash-chain-strike/", short: "https://xno.click/CryptoClash" },
-    { emoji: "🛡️", name: "Feeless Defence", tag: "A daily tower-defence challenge — same board for everyone, every day.", direct: "https://nanorekin.github.io/feeless-defence/", short: "https://xno.click/FeelessDefence" },
-    { emoji: "🪙", name: "Feeless Catch", tag: "Catch the falling coins before they slip away.", direct: "https://nanorekin.github.io/feeless-catch/", short: "https://xno.click/FeelessCatch" },
-    { emoji: "🧠", name: "Feeless Memory", tag: "A crypto-coin matching game — find every pair.", direct: "https://nanorekin.github.io/feeless-memory/", short: "https://xno.click/FeelessMemory" },
-    { emoji: "⛏️", name: "Feeless Mining Rush", tag: "A tap-to-mine idle clicker — stack up your hash rate.", direct: "https://nanorekin.github.io/feeless-mining-rush/", short: "https://xno.click/MininigRush" },
-    { emoji: "🧱", name: "Feeless Stack", tag: "A one-tap block-stacking game — how high can you build?", direct: "https://nanorekin.github.io/feeless-stack/", short: "https://xno.click/FeelessStack" },
-    { emoji: "🐍", name: "Chain Snake", tag: "Classic snake with a crypto-coin chain trailing behind you.", direct: "https://nanorekin.github.io/chain-snake/", short: "https://xno.click/ChainSnake" },
-    { emoji: "🐦", name: "Feeless Flap", tag: "A one-tap flyer — guide your XNO coin through the fee gates.", direct: "https://nanorekin.github.io/feeless-flap/", short: "https://xno.click/FeelessFlap" },
-    { emoji: "❓", name: "Feeless Quiz", tag: "A daily crypto trivia quiz — test what you know.", direct: "https://nanorekin.github.io/Feeless-Quiz/", short: "https://xno.click/FeelessQuiz" },
-    { emoji: "⌨️", name: "Feeless Typer", tag: "A crypto-themed typing speed test.", direct: "https://nanorekin.github.io/Feeless-Typer/", short: "https://xno.click/FeelessTyper" },
-    { emoji: "📈", name: "HiLo", tag: "Guess whether the price went higher or lower, using real historical data.", direct: "https://nanorekin.github.io/HiLo/", short: "https://xno.click/HiLo" }
+    { emoji: "🚀", name: "To the moon", tag: "Blast asteroids before they reach your rocket — collect XNO, BTC, ETH and SOL power-ups along the way.", direct: "https://nanorekin.github.io/ToTheMoon/" },
+    { emoji: "🏎️", name: "Block Racer", tag: "A 3-lane dodging racer through rival-chain traffic, with an XNO nitro power-up.", direct: "https://nanorekin.github.io/block-racer/" },
+    { emoji: "🧪", name: "CoinFusion", tag: "A 2048-style merging game — combine coins from DOGE all the way up to XNO.", direct: "https://nanorekin.github.io/CoinFusion/" },
+    { emoji: "🥊", name: "Crypto Clash: Chain Strike", tag: "A crypto-fighting game — pick your chain and battle it out.", direct: "https://nanorekin.github.io/crypto-clash-chain-strike/" },
+    { emoji: "🛡️", name: "Feeless Defence", tag: "A daily tower-defence challenge — same board for everyone, every day.", direct: "https://nanorekin.github.io/feeless-defence/" },
+    { emoji: "🪙", name: "Feeless Catch", tag: "Catch the falling coins before they slip away.", direct: "https://nanorekin.github.io/feeless-catch/" },
+    { emoji: "🧠", name: "Feeless Memory", tag: "A crypto-coin matching game — find every pair.", direct: "https://nanorekin.github.io/feeless-memory/" },
+    { emoji: "⛏️", name: "Feeless Mining Rush", tag: "A tap-to-mine idle clicker — stack up your hash rate.", direct: "https://nanorekin.github.io/feeless-mining-rush/" },
+    { emoji: "🧱", name: "Feeless Stack", tag: "A one-tap block-stacking game — how high can you build?", direct: "https://nanorekin.github.io/feeless-stack/" },
+    { emoji: "🐍", name: "Chain Snake", tag: "Classic snake with a crypto-coin chain trailing behind you.", direct: "https://nanorekin.github.io/chain-snake/" },
+    { emoji: "🐦", name: "Feeless Flap", tag: "A one-tap flyer — guide your XNO coin through the fee gates.", direct: "https://nanorekin.github.io/feeless-flap/" },
+    { emoji: "❓", name: "Feeless Quiz", tag: "A daily crypto trivia quiz — test what you know.", direct: "https://nanorekin.github.io/Feeless-Quiz/" },
+    { emoji: "⌨️", name: "Feeless Typer", tag: "A crypto-themed typing speed test.", direct: "https://nanorekin.github.io/Feeless-Typer/" },
+    { emoji: "📈", name: "HiLo", tag: "Guess whether the price went higher or lower, using real historical data.", direct: "https://nanorekin.github.io/HiLo/" },
+    { emoji: "🎰", name: "Feeless Casino", tag: "Play-money Dice, Mines, Crash and Plinko with provably-fair rounds — never real money.", direct: "https://nanorekin.github.io/Feeless-Casino/" },
+    { emoji: "🗡️", name: "Chain Crawler", tag: "A roguelike dungeon crawl — five depths, a boss, and permanent upgrades between runs.", direct: "https://nanorekin.github.io/Chain-Crawler/" },
+    { emoji: "🏗️", name: "Feeless Empire", tag: "An idle empire builder that keeps earning while you're away — fork the chain for permanent bonuses.", direct: "https://nanorekin.github.io/Feeless-Empire/" },
+    { emoji: "📊", name: "Feeless Portfolio", tag: "Trade a 30-day season of entirely made-up markets and see what your instincts are worth.", direct: "https://nanorekin.github.io/Feeless-portfolio/" }
   ];
 
   // ---------- render game cards ----------
@@ -179,8 +176,7 @@
     card.innerHTML =
       '<div class="emoji">' + g.emoji + '</div>' +
       '<h3>' + g.name + '</h3>' +
-      '<a class="play" href="' + g.direct + '" target="_blank" rel="noopener" aria-label="Play ' + g.name + '"></a>' +
-      '<a class="short" href="' + g.short + '" target="_blank" rel="noopener" title="Open via short link (supports this project)" aria-label="Open ' + g.name + ' via short link">🎟️</a>';
+      '<a class="play" href="' + g.direct + '" target="_blank" rel="noopener" aria-label="Play ' + g.name + '"></a>';
     grid.appendChild(card);
   });
   document.getElementById("gamecount").textContent = GAMES.length;
